@@ -4,8 +4,9 @@ import Button from './Button';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(SplitText)
+gsap.registerPlugin(SplitText, ScrollTrigger)
 
 
 const Hero = () => {
@@ -14,12 +15,12 @@ const Hero = () => {
     const textContainer = useRef<HTMLDivElement | null>(null)
     const videoRef = useRef<HTMLVideoElement | null>(null)
     useEffect(() => {
-    const timer = setTimeout(() => {
-      videoRef.current?.play()
-    }, 2000) // delay in ms
+        const timer = setTimeout(() => {
+            videoRef.current?.play()
+        }, 2000) // delay in ms
 
-    return () => clearTimeout(timer)
-  }, [])
+        return () => clearTimeout(timer)
+    }, [])
 
     useGSAP(() => {
         if (!textContainer.current || !textRef.current || !textRef2.current) return
@@ -40,8 +41,10 @@ const Hero = () => {
                 autoAlpha: 0,
             })
 
-            const tl = gsap.timeline({ delay: 3 })
-
+            const tl = gsap.timeline({
+                delay: 3
+            })
+        
             tl.from(textContainer.current, {
                 y: 60,
                 autoAlpha: 0,
@@ -58,12 +61,11 @@ const Hero = () => {
                     splitDesc.lines,
                     {
                         y: 20,
-                        stagger: { amount: 0.6 },
+                        stagger: { amount: 0.2 },
                         ease: 'power3.out',
                     },
                     '-=0.4'
                 )
-
             return () => {
                 splitTitle.revert()
                 splitDesc.revert()
@@ -75,7 +77,7 @@ const Hero = () => {
 
 
     return (
-        <div className='h-screen w-full flex-center relative '>
+        <div className='hero h-screen w-full flex-center relative '>
             <div className='background relative w-full h-full after:content-[""] after:w-full after:h-full after:absolute after:inset-0 after:z-2 after:bg-black/15'>
                 <video ref={videoRef} muted playsInline className='absolute inset-0 z-[-1] h-full w-full object-cover'>
                     <source src="/videos/hero-bg.mp4" type="video/mp4" />
