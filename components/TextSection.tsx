@@ -22,7 +22,7 @@ const TextSection = () => {
             }
         })
         tl.from(textCard.current, {
-            x:280,
+            x:80,
             autoAlpha: 0,
             transformOrigin: 'start',
             ease: 'power3.out',

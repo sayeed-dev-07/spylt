@@ -20,7 +20,7 @@ const TextColorReveal = ({ text }: { text: string }) => {
             scrollTrigger: {
                 trigger: textContainer.current,
                 start: 'top 60%',
-                end: '+=300px',
+                end: '+=200px',
                 scrub: true,
             }
         })
