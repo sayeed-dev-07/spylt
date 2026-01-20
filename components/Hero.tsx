@@ -78,17 +78,29 @@ const Hero = () => {
 
     return (
         <div className='hero h-screen w-full flex-center relative '>
+<<<<<<< HEAD
             <div className='background relative w-full h-full after:content-[""] after:w-full after:h-full after:absolute after:inset-0 after:z-2 after:bg-black/15'>
+=======
+            <div className='background relative w-full h-full after:content-[""] after:w-full after:h-full after:absolute after:inset-0 after:z-2 after:bg-black/5'>
+>>>>>>> 4d96ff6 (Initial commit)
                 <video ref={videoRef} muted playsInline className='absolute inset-0 z-[-1] h-full w-full object-cover'>
                     <source src="/videos/hero-bg.mp4" type="video/mp4" />
                 </video>
             </div>
+<<<<<<< HEAD
             <div ref={textContainer} className='absolute h-full w-full top-0 left-0 inset-0 flex-center   text-5xl md:text-8xl  xl:text-[150px] flex flex-col z-5 gap-y-8 md:gap-y-5 '>
+=======
+            <div ref={textContainer} className='absolute h-full w-full top-0 left-0 inset-0 flex-center   text-5xl md:text-8xl  xl:text-[145px] flex flex-col z-5 gap-y-8 md:gap-y-5 '>
+>>>>>>> 4d96ff6 (Initial commit)
                 <div className='font-antonio uppercase font-bold text-center'>
                     <p ref={textRef} className='text-dark-brown tracking-tighter mb-2'>Freaking Delicious
                     </p>
                     <div className='sm:p-3 p-1.5  transform -rotate-2 bg-milk'>
+<<<<<<< HEAD
                         <div className='px-2 pb-3 py-0.5 bg-light-brown leading-12 sm:leading-20 md:leading-30 xl:leading-45'>
+=======
+                        <div className='px-2 pb-3 py-0.5 bg-mid-brown leading-12 sm:leading-20 md:leading-30 xl:leading-40'>
+>>>>>>> 4d96ff6 (Initial commit)
                             <p className='text-[#fce1cd] tracking-tighter'>Protein + Caffeine</p>
                         </div>
                     </div>
