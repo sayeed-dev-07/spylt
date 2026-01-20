@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-
-import Hero from "@/components/Hero";
-import Image from "next/image";
-
-export default function Home() {
-  return (
-    <div>
-     <Hero/>
-=======
 'use client'
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
@@ -46,8 +36,7 @@ export default function Home() {
      <div className="z-5 relative">
       <TextSection/>
      </div>
-     <div className="h-screen"></div>
->>>>>>> 4d96ff6 (Initial commit)
+     <Products/>
     </div>
   );
 }
