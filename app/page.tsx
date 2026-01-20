@@ -10,6 +10,7 @@ export default function Home() {
 =======
 'use client'
 import Hero from "@/components/Hero";
+import Products from "@/components/Products";
 import TextSection from "@/components/TextSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";

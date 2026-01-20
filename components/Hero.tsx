@@ -63,6 +63,7 @@ const Hero = () => {
                         y: 20,
                         stagger: { amount: 0.2 },
                         ease: 'power3.out',
+                        autoAlpha:0
                     },
                     '-=0.4'
                 )

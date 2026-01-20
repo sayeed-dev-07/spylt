@@ -10,6 +10,7 @@ import TextAnimation from './textReveal';
 gsap.registerPlugin(ScrollTrigger)
 
 const TextSection = () => {
+    const textSectionRef = useRef(null)
     const textCard = useRef<HTMLDivElement | null>(null)
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -24,14 +25,13 @@ const TextSection = () => {
         tl.from(textCard.current, {
             x:80,
             autoAlpha: 0,
-            transformOrigin: 'start',
             ease: 'power3.out',
         })
 
-    })
+    },{scope: textSectionRef})
 
     return (
-        <div className='py-[5%] text-milk h-[110vh] text-center bg-red-brown text-5xl md:text-8xl  xl:text-[130px] font-antonio uppercase flex items-center  justify-center flex-col overflow-hidden font-bold'>
+        <div ref={textSectionRef} className='py-[5%]  text-[#8c4f42] h-[110vh] text-center bg-red-brown text-5xl md:text-8xl  xl:text-[130px] font-antonio uppercase flex items-center  justify-center flex-col overflow-hidden font-bold'>
             <TextColorReveal text='Stir up your
                 fearless past and'/>
             <div ref={textCard} className='p-4 w-fit bg-red-brown rotate-8 relative z-10 will-change-transform'>
@@ -41,7 +41,7 @@ const TextSection = () => {
             </div>
             <TextColorReveal text='your future with every
                 gulp of Perfect Protein'/>
-            <TextAnimation style='font-normal text-lg capitalize font-nunito w-full max-w-[500px] mx-auto text-center mt-12 tracking-tight px-2 leading-tight' text='Rev up your rebel spirit and feed the adventure of life with SPYLT, where you’re one chug away from epic nostalgia and fearless fun.' />
+            <TextAnimation style='font-normal text-lg capitalize font-nunito w-full max-w-[500px] text-milk mx-auto text-center mt-12 tracking-tight px-2 leading-tight' text='Rev up your rebel spirit and feed the adventure of life with SPYLT, where you’re one chug away from epic nostalgia and fearless fun.' />
         </div>
     );
 };

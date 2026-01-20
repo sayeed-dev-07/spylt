@@ -13,14 +13,13 @@ const TextColorReveal = ({ text }: { text: string }) => {
 
     useGSAP(() => {
         const splitText = SplitText.create(textContainer.current, {
-            type: 'words, lines',
-            mask: 'lines',
+            type: 'words',
         })
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: textContainer.current,
                 start: 'top 60%',
-                end: '+=200px',
+                end: '+=300px',
                 scrub: true,
             }
         })
@@ -32,7 +31,7 @@ const TextColorReveal = ({ text }: { text: string }) => {
     })
 
     return (
-        <p className='max-w-300 w-full text-[#8c4f42]' ref={textContainer}>
+        <p className='max-w-300 w-full' ref={textContainer}>
             {text}
         </p>
     );
