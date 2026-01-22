@@ -1,81 +1,91 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 'use client'
-import React, { useRef } from 'react';
-import TextAnimationChar from './TextCharsAnim';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ProductCard from './ProductCard';
+import React, { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import TextAnimationChar from './TextCharsAnim'
+import SliderWrapper from './SliderWrapper'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Products = () => {
+    const wrapperRef = useRef<HTMLDivElement | null>(null)
+    const pinRef = useRef<HTMLDivElement | null>(null)
+    const trackRef = useRef<HTMLDivElement | null>(null)
     const textCard = useRef<HTMLDivElement | null>(null)
-    const containerRef = useRef<HTMLDivElement | null>(null)
-    const movingWrap = useRef<HTMLDivElement | null>(null) // New ref for the horizontal track
 
     useGSAP(() => {
-        if (!movingWrap.current || !containerRef.current) return
+        if (!wrapperRef.current || !pinRef.current || !trackRef.current) return
 
-        gsap.to(movingWrap.current, {
-            x: () =>
-                -(movingWrap.current!.scrollWidth - window.innerWidth),
-            ease: 'none',
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: 'top top',
-                end: () =>
-                    `+=${movingWrap.current!.scrollWidth - window.innerWidth + 100}`,
-                scrub: 1,
-                pin: true,
-                pinSpacing: true,
-                invalidateOnRefresh: true,
-                anticipatePin: 1,
-            },
+        const mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1024px)", () => {
+
+            const getScrollAmount = () =>
+                trackRef.current!.scrollWidth - window.innerWidth
+
+            const EXTRA_SPACE = () => window.innerWidth * 0.2
+
+            gsap.to(trackRef.current, {
+                x: () => -(getScrollAmount() + EXTRA_SPACE()),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: wrapperRef.current,
+                    pin: true,
+                    start: "top top",
+                    end: () => `+=${getScrollAmount() + EXTRA_SPACE()}`,
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                },
+            })
         })
 
-        gsap.from(textCard.current, {
-            x: -80,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: textCard.current,
-                start: 'top 80%',
-            },
-        })
-    }, { scope: containerRef })
-
+        // Text reveal
+        gsap.fromTo(textCard.current,
+            { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' },
+            {
+                clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: pinRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+            }
+        )
+    }, { scope: wrapperRef })
 
     return (
-        /* The containerRef stays pinned in place */
-        <div ref={containerRef} className='h-screen overflow-hidden bg-milk'>
-
-            {/* The movingWrap is what actually slides left and right */}
-            <div ref={movingWrap} className='flex h-full w-max items-center px-[5vw]'>
-
-                {/* Hero / Text Section */}
-                <div className='flex-shrink-0 w-[40vw] flex flex-col justify-center items-center'>
-                    <div className='w-full text-center text-dark-brown text-5xl md:text-8xl xl:text-[130px] font-antonio uppercase flex items-center justify-center flex-col font-bold'>
-                        <TextAnimationChar text='We have 6' />
-                        <div ref={textCard} className='p-4 w-fit bg-milk -rotate-4 relative z-10 will-change-transform'>
-                            <div className='px-6 py-3 pb-5 bg-mid-brown'>
-                                <p className='text-milk text-nowrap'>freaking</p>
+        <section ref={wrapperRef} className="overflow-hidden  bg-milk">
+            <div ref={pinRef} className="min-h-screen  flex items-center justify-center lg:justify-start px-5">
+                <div
+                    ref={trackRef}
+                    className="flex flex-col lg:flex-row flex-nowrap  will-change-transform  px-1 py-[5%] gap-y-24"
+                >
+                    {/* 1. Text section */}
+                    <div className="w-screen flex-none flex text-dark-brown justify-center">
+                        <div className="text-center font-antonio uppercase font-bold text-5xl md:text-8xl xl:text-[130px]">
+                            <TextAnimationChar text="We have 6" />
+                            <div ref={textCard} className="inline-block bg-milk -rotate-4 p-4">
+                                <div className="bg-mid-brown px-6 py-4">
+                                    <p className="text-milk">freaking</p>
+                                </div>
                             </div>
+                            <TextAnimationChar delay={0.7} text="delicious flavors" />
                         </div>
-                        <TextAnimationChar delay={0.7} text='delicious flavors' />
                     </div>
+
+                    {/* 2. Slider Cards */}
+
+                    <SliderWrapper />
+
+
                 </div>
-
-                <ProductCard Num={0} />
-                <ProductCard Num={4} rotate='left' />
-                <ProductCard Num={2} />
-                <ProductCard Num={3} rotate='left' />
-                
-
             </div>
-        </div>
-    );
-};
+        </section>
+    )
+}
 
-export default Products;
+export default Products

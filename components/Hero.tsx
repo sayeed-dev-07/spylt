@@ -10,6 +10,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger)
 
 
 const Hero = () => {
+    const cardRef = useRef<HTMLDivElement | null>(null)
     const textRef = useRef<HTMLParagraphElement | null>(null)
     const textRef2 = useRef<HTMLParagraphElement | null>(null)
     const textContainer = useRef<HTMLDivElement | null>(null)
@@ -51,12 +52,17 @@ const Hero = () => {
                 duration: 0.6,
                 ease: 'power3.out',
             })
+                .to(cardRef.current,{
+                    clipPath:' polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                    duration:0.6,
+                    ease: 'power3.out',
+                },'-=0.3')
                 .to(splitTitle.chars, {
                     y: 0,
                     autoAlpha: 1,
                     stagger: { amount: 0.5 },
                     ease: 'power3.out',
-                })
+                },)
                 .from(
                     splitDesc.lines,
                     {
@@ -64,8 +70,7 @@ const Hero = () => {
                         stagger: { amount: 0.2 },
                         ease: 'power3.out',
                         autoAlpha:0
-                    },
-                    '-=0.4'
+                    },'-=0.3'
                 )
             return () => {
                 splitTitle.revert()
@@ -88,7 +93,7 @@ const Hero = () => {
                 <div className='font-antonio uppercase font-bold text-center'>
                     <p ref={textRef} className='text-dark-brown tracking-tighter mb-2'>Freaking Delicious
                     </p>
-                    <div className='sm:p-3 p-1.5  transform -rotate-2 bg-milk'>
+                    <div ref={cardRef} style={{clipPath:' polygon(49% 0, 49% 0, 50% 100%, 50% 100%)'}} className='sm:p-3 p-1.5  -rotate-2 bg-milk'>
                         <div className='px-2 pb-3 py-0.5 bg-light-brown leading-12 sm:leading-20 md:leading-30 xl:leading-45'>
                             <p className='text-[#fce1cd] tracking-tighter'>Protein + Caffeine</p>
                         </div>

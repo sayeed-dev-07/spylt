@@ -17,15 +17,14 @@ const TextSection = () => {
             scrollTrigger: {
                 trigger: textCard.current,
                 start: 'top 60%',
-                end: '+=300',
+                end: '+=400',
                 scrub: true,
                 invalidateOnRefresh: true,
             }
         })
         tl.from(textCard.current, {
-            x:80,
-            autoAlpha: 0,
-            ease: 'power3.out',
+            clipPath:'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)',
+            ease: 'power3.inOut',
         })
 
     },{scope: textSectionRef})
@@ -34,7 +33,7 @@ const TextSection = () => {
         <div ref={textSectionRef} className='py-[5%]  text-[#8c4f42] h-[110vh] text-center bg-red-brown text-5xl md:text-8xl  xl:text-[130px] font-antonio uppercase flex items-center  justify-center flex-col overflow-hidden font-bold'>
             <TextColorReveal text='Stir up your
                 fearless past and'/>
-            <div ref={textCard} className='p-4 w-fit bg-red-brown rotate-8 relative z-10 will-change-transform'>
+            <div style={{clipPath:'polygon(0 0, 100% 0%, 100% 100%, 0% 100%)'}} ref={textCard} className='p-4 w-fit bg-red-brown rotate-8 relative z-10 will-change-transform'>
                 <div className='px-6 py-3 pb-5 bg-light-brown'>
                     <p className='text-red-brown text-nowrap'>FUEL UP</p>
                 </div>

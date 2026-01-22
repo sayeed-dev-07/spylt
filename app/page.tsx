@@ -37,6 +37,8 @@ export default function Home() {
       <TextSection/>
      </div>
      <Products/>
+     <div className="h-[300vh] bg-[skyblue]"></div>
     </div>
+
   );
 }
