@@ -1,4 +1,5 @@
 'use client'
+import Details from "@/components/Details";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import TextSection from "@/components/TextSection";
@@ -37,7 +38,7 @@ export default function Home() {
       <TextSection/>
      </div>
      <Products/>
-     <div className="h-[300vh] bg-[skyblue]"></div>
+     <Details/>
     </div>
 
   );
