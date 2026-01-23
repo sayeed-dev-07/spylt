@@ -4,6 +4,7 @@ import TextAnimationChar from './TextCharsAnim';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Vitamin from './Vitamin';
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -27,7 +28,7 @@ const Details = () => {
         )
     })
     return (
-        <section className="relative w-full min-h-[110vh] bg-[#e8ddcb] overflow-hidden">
+        <section className="relative w-full  min-h-[110vh] bg-[#e8ddcb] overflow-hidden">
 
             {/* BIG IMAGE — STICKS TO BOTTOM */}
             <div
@@ -35,7 +36,7 @@ const Details = () => {
                             absolute inset-x-0 bottom-0
                             bg-no-repeat bg-bottom bg-cover
                             w-full
-                            h-[60vh] lg:h-full
+                            h-[50vh] lg:h-full
                             z-20
                         "
                 style={{ backgroundImage: "url('/images/big-img.png')" }}
@@ -67,8 +68,20 @@ const Details = () => {
                     <TextAnimationChar text='Milk contains a wide array of nutrients, including vitamins, minerals, and protein, and this is lactose free.' />
                 </div>
                 </div>
-                <div>
-                    
+                <div className='mt-42 w-full'>
+                    <div className='p-2 sm:p-5 bg-[#e8ddca] w-[98%] sm:w-[90%] mx-auto rounded-full'>
+                        <div className='bg-[#fdebd2] items-center rounded-full justify-between flex font-nunito text-dark-brown px-7 sm:px-10 sm:py-8 py-4 w-full'>
+                            <Vitamin name='Potassium' amount={245}/>
+                            <div className="line bg-dark-brown h-22 w-px"></div>
+                            <Vitamin name='Potassium' amount={500}/>
+                            <div className="line bg-dark-brown hidden md:block h-22 w-px"></div>
+                            <Vitamin md={true} name='Potassium' amount={176}/>
+                            <div className="line bg-dark-brown hidden md:block h-22 w-px"></div>
+                            <Vitamin md={true} name='Potassium' amount={5}/>
+                            <div className="line bg-dark-brown h-22 w-px"></div>
+                            <Vitamin name='Potassium' border={false} amount={1}/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
