@@ -7,7 +7,7 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
-const TextAnimation = ({ text, style }: { text: string, style?: string,scrub?: boolean }) => {
+const TextAnimation = ({ text, style }: { text: string, style?: string}) => {
     const textRef = useRef<HTMLDivElement | null>(null)
 
     useGSAP(() => {
@@ -21,26 +21,28 @@ const TextAnimation = ({ text, style }: { text: string, style?: string,scrub?: b
             force3D: true,
             willChange: 'transform, opacity'
         });
-        gsap.from(split.lines, {
+        gsap.from(split.words, {
             scrollTrigger: {
                 trigger: textRef.current,
                 start: 'top 80%',
-                once: true,
+                toggleActions: 'play reverse play reverse',
             },
             duration: 0.6,
             ease: 'power3.out',
-            stagger: 0.15,
+            stagger: 0.03,
             autoAlpha: 0,
             yPercent: 100,
         })
 
-        return () => split.revert()
+        return () => {
+            split.revert();
+        };
     }, { scope: textRef })
 
 
 
     return (
-        <div ref={textRef} className={`${style} will-change-auto`}>
+        <div ref={textRef} className={`${style} will-change-auto font-nunito`}>
             {text}
         </div>
     );

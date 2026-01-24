@@ -90,7 +90,7 @@ const Details = () => {
                     </div>
 
                     <div className='text-dark-brown font-nunito text-2xl font-semibold max-w-[400px] lg:text-center text-start w-full'>
-                        <TextAnimation text='Milk contains a wide array of nutrients, including vitamins, minerals, and protein, and this is lactose free'/>
+                        <TextAnimation style='font-semibold text-xl  capitalize font-nunito w-full max-w-[600px]  mx-auto text-start  tracking-tight leading-tight' text='Milk contains a wide array of nutrients, including vitamins, minerals, and protein, and this is lactose free'/>
                     </div>
                 </div>
 
