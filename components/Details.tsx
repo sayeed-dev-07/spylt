@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Details = () => {
     const textCard = useRef(null)
-    const containeRef = useRef(null)
+
     useGSAP(()=>{
         gsap.fromTo(textCard.current,
             { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' },
@@ -68,7 +68,7 @@ const Details = () => {
                     <TextAnimationChar text='Milk contains a wide array of nutrients, including vitamins, minerals, and protein, and this is lactose free.' />
                 </div>
                 </div>
-                <div className='mt-42 w-full'>
+                <div className='absolute bottom-[25%] left-0 w-full'>
                     <div className='p-2 sm:p-5 bg-[#e8ddca] w-[98%] sm:w-[90%] mx-auto rounded-full'>
                         <div className='bg-[#fdebd2] items-center rounded-full justify-between flex font-nunito text-dark-brown px-7 sm:px-10 sm:py-8 py-4 w-full'>
                             <Vitamin name='Potassium' amount={245}/>

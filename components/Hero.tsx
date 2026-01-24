@@ -62,7 +62,7 @@ const Hero = () => {
                     autoAlpha: 1,
                     stagger: { amount: 0.5 },
                     ease: 'power3.out',
-                },)
+                },'-=0.2')
                 .from(
                     splitDesc.lines,
                     {

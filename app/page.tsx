@@ -18,14 +18,16 @@ export default function Home() {
     const tl = gsap.timeline({
       scrollTrigger:{
         trigger:heroRef.current,
-        start:'top top',
-        end:'+=100%',
+        start:'1% top',
+        end:'bottom top',
         scrub:true,
       }
     })
     tl.to(heroRef.current,{
       rotate:'14deg',
-      scale:0.8
+      scale:0.8,
+      y:100,
+      ease:'power1.inOut'
     })
   },{scope:containeRef})
 
