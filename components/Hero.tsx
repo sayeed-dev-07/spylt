@@ -83,7 +83,7 @@ const Hero = () => {
 
 
     return (
-        <div className='hero h-dvh w-full flex-center relative '>
+        <div className='hero h-screen w-full flex-center relative '>
             <div className='background relative w-full h-full after:content-[""] after:w-full after:h-full after:absolute after:inset-0 after:z-2 after:bg-black/15'>
                 <video ref={videoRef} muted playsInline className='absolute inset-0 z-[-1] h-full w-full object-cover'>
                     <source src="/videos/hero-bg.mp4" type="video/mp4" />

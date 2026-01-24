@@ -7,17 +7,18 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
-const TextAnimation = ({ text, style }: { text: string, style?: string}) => {
+const TextAnimation = ({ text, style }: { text: string, style?: string }) => {
     const textRef = useRef<HTMLDivElement | null>(null)
 
     useGSAP(() => {
         if (!textRef.current) return
-
-        const split = SplitText.create(textRef.current, {
+        const mm = gsap.matchMedia()
+        mm.add("(min-width: 769px)", () => {
+            const split = SplitText.create(textRef.current, {
             type: 'lines, words',
-            mask:'lines'
+            mask: 'lines'
         })
-        gsap.set(split.chars, { 
+        gsap.set(split.chars, {
             force3D: true,
             willChange: 'transform, opacity'
         });
@@ -37,6 +38,7 @@ const TextAnimation = ({ text, style }: { text: string, style?: string}) => {
         return () => {
             split.revert();
         };
+        });
     }, { scope: textRef })
 
 
