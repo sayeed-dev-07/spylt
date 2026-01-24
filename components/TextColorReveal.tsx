@@ -12,26 +12,43 @@ const TextColorReveal = ({ text }: { text: string }) => {
     const textContainer = useRef<HTMLParagraphElement | null>(null)
 
     useGSAP(() => {
-        const splitText = SplitText.create(textContainer.current, {
+        if (!textContainer.current) return;
+
+        const splitText = new SplitText(textContainer.current, {
             type: 'words',
         })
+
+        // Optimization: Pre-set properties to avoid layout shifts
+        gsap.set(splitText.words, { 
+            color: 'rgba(250, 234, 222, 0.2)', // The "dimmed" base color
+            willChange: 'color' 
+        });
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: textContainer.current,
-                start: 'top 60%',
-                end: '+=300px',
-                scrub: true,
+                start: 'top 80%', // Start a bit earlier for smoother entry
+                end: 'top 20%',   // Relative to viewport is usually more consistent
+                scrub: 0.5,       // Adding a tiny number (0.5) adds "smoothing" to the scroll
             }
         })
+
         tl.to(splitText.words, {
             color: '#faeade',
-            stagger:0.4,
-            ease: 'power3'
+            stagger: 0.1,         // Smaller stagger feels more like a "flow" than a "step"
+            ease: 'power3',         // IMPORTANT: Use 'none' for scrubbed animations
         })
-    })
+
+        return () => {
+            splitText.revert();
+        };
+    }, { scope: textContainer })
 
     return (
-        <p className='max-w-300 w-full' ref={textContainer}>
+        <p 
+            className=' w-full  leading-relaxed' 
+            ref={textContainer}
+        >
             {text}
         </p>
     );

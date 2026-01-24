@@ -20,7 +20,7 @@ const Products = () => {
         const mm = gsap.matchMedia();
 
         mm.add("(min-width: 1024px)", () => {
-
+            gsap.set(trackRef.current, { force3D: true, z: 0.01 });
             const getScrollAmount = () =>
                 trackRef.current!.scrollWidth - window.innerWidth
 
@@ -39,6 +39,7 @@ const Products = () => {
                     anticipatePin: 1,
                 },
             })
+           
         })
 
         // Text reveal
@@ -49,9 +50,10 @@ const Products = () => {
                 duration: 0.8,
                 ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: pinRef.current,
+                    trigger: textCard.current,
                     start: 'top 80%',
-                    toggleActions: 'play none none none',
+                    end:'bottom 20%',
+                    scrub:0.5,
                 },
             }
         )
@@ -68,7 +70,7 @@ const Products = () => {
                     <div className="w-screen flex-none flex text-dark-brown justify-center">
                         <div className="text-center font-antonio uppercase font-bold text-5xl md:text-8xl xl:text-[130px]">
                             <TextAnimationChar text="We have 6" />
-                            <div ref={textCard} className="inline-block bg-milk -rotate-4 p-4">
+                            <div style={{ willChange: 'clip-path' }} ref={textCard} className="inline-block bg-milk -rotate-4 p-4">
                                 <div className="bg-mid-brown px-6 py-4">
                                     <p className="text-milk">freaking</p>
                                 </div>

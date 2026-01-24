@@ -62,7 +62,7 @@ const Hero = () => {
                     autoAlpha: 1,
                     stagger: { amount: 0.5 },
                     ease: 'power3.out',
-                },'-=0.2')
+                },'-=0.3')
                 .from(
                     splitDesc.lines,
                     {
@@ -70,7 +70,7 @@ const Hero = () => {
                         stagger: { amount: 0.2 },
                         ease: 'power3.out',
                         autoAlpha:0
-                    },'-=0.3'
+                    },'-=0.5'
                 )
             return () => {
                 splitTitle.revert()
@@ -93,7 +93,7 @@ const Hero = () => {
                 <div className='font-antonio uppercase font-bold text-center'>
                     <p ref={textRef} className='text-dark-brown tracking-tighter mb-2'>Freaking Delicious
                     </p>
-                    <div ref={cardRef} style={{clipPath:' polygon(49% 0, 49% 0, 50% 100%, 50% 100%)'}} className='sm:p-3 p-1.5  -rotate-2 bg-milk'>
+                    <div ref={cardRef} style={{clipPath:' polygon(49% 0, 49% 0, 50% 100%, 50% 100%)', willChange:'clip-path'}} className='sm:p-3 p-1.5  -rotate-2 bg-milk'>
                         <div className='px-2 pb-3 py-0.5 bg-light-brown leading-12 sm:leading-20 md:leading-30 xl:leading-45'>
                             <p className='text-[#fce1cd] tracking-tighter'>Protein + Caffeine</p>
                         </div>

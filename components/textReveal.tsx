@@ -7,7 +7,7 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
-const TextAnimation = ({ text, style }: { text: string, style: string,scrub?: boolean }) => {
+const TextAnimation = ({ text, style }: { text: string, style?: string,scrub?: boolean }) => {
     const textRef = useRef<HTMLDivElement | null>(null)
 
     useGSAP(() => {
@@ -17,7 +17,10 @@ const TextAnimation = ({ text, style }: { text: string, style: string,scrub?: bo
             type: 'lines, words',
             mask:'lines'
         })
-
+        gsap.set(split.chars, { 
+            force3D: true,
+            willChange: 'transform, opacity'
+        });
         gsap.from(split.lines, {
             scrollTrigger: {
                 trigger: textRef.current,

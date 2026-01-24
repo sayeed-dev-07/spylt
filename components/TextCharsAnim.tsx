@@ -11,13 +11,19 @@ const TextAnimationChar = ({ text, style, delay=0 }: { text: string, style?: str
     const textRef = useRef<HTMLDivElement | null>(null)
     useGSAP(() => {
         if (!textRef.current) return
-
+        gsap.set(textRef.current, { opacity: 1, visibility: 'visible' });
         const split = SplitText.create(textRef.current, {
             type: 'chars, lines',
             mask:'lines'
         })
+        gsap.set(split.chars, {
+            yPercent:100, 
+            autoAlpha: 0, 
+            force3D: true,
+            willChange: 'transform, opacity'
+        });
 
-        gsap.from(split.chars, {
+        gsap.to(split.chars, {
             scrollTrigger: {
                 trigger: textRef.current,
                 start: 'top 80%',
@@ -25,12 +31,10 @@ const TextAnimationChar = ({ text, style, delay=0 }: { text: string, style?: str
             },
             
             ease: 'power3.out',
-            stagger: {
-                amount:0.5
-            },
+            stagger:0.02,
             delay:delay,
-            autoAlpha: 0,
-            yPercent: 100,
+            autoAlpha: 1,
+            yPercent: 0,
         })
 
         return () => split.revert()
@@ -39,7 +43,7 @@ const TextAnimationChar = ({ text, style, delay=0 }: { text: string, style?: str
 
 
     return (
-        <div ref={textRef} className={`${style} will-change-auto`}>
+        <div ref={textRef} className={`${style} `} style={{opacity:0, visibility:'hidden'}}>
             {text}
         </div>
     );
