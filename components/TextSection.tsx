@@ -30,7 +30,7 @@ const TextSection = () => {
     },{scope: textSectionRef})
 
     return (
-        <div ref={textSectionRef} className='py-[5%]  text-[#8c4f42] min-h-[110vh] text-center bg-red-brown text-5xl md:text-8xl  xl:text-[130px] font-antonio uppercase flex items-center  justify-center flex-col overflow-hidden font-bold  tracking-tighter'>
+        <div ref={textSectionRef} className='py-[5%]  text-[#8c4f42] h-[110vh] text-center bg-red-brown text-5xl md:text-8xl  xl:text-[130px] font-antonio uppercase flex items-center   sm:justify-center justify-start flex-col overflow-hidden font-bold  tracking-tighter'>
             <TextColorReveal text='Stir up your
                 fearless past and'/>
             <div style={{clipPath:'polygon(0 0, 100% 0%, 100% 100%, 0% 100%)', willChange:'clip-path'}} ref={textCard} className='p-4 w-fit bg-red-brown rotate-8 relative z-10 will-change-transform'>

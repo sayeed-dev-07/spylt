@@ -33,7 +33,7 @@ const TextMoveAnim = ({ x, black = true, text }: { x: number, black?: boolean, t
                     scrollTrigger: {
                         trigger: textConRef.current,
                         start: 'top 60%',
-                        end: '+=650%',
+                        end: '+=100%',
                         scrub: 0.5,
                     },
                     x: x,

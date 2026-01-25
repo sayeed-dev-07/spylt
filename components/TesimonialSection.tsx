@@ -8,53 +8,99 @@ import { cards } from '@/public/Data/card';
 import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.config({
+    ignoreMobileResize: true
+})
 
 const TesimonialSection = () => {
     const testimonialRef = useRef<HTMLDivElement | null>(null);
 
 
     useGSAP(() => {
-        gsap.set(testimonialRef.current, { marginTop: '-140vh' });
+        gsap.set(testimonialRef.current, { y: '-140vh' })
         const cards = testimonialRef.current?.querySelectorAll('.card')
         // Position all cards below the viewport initially
         gsap.set('.card', { y: '100vh' });
+        gsap.set(".card", { force3D: true })
+        gsap.set(testimonialRef.current, { force3D: true })
+        const mm = gsap.matchMedia()
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isDesktop, isMobile } = context.conditions || {};
+            if (isDesktop) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: testimonialRef.current,
+                        start: "top top",
+                        end: `+=${((cards?.length ?? 0) + 1) * 100}%`,
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    }
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: testimonialRef.current,
-                start: "top top",
-                end: `+=${((cards?.length ?? 0) + 1) * 100}%`,
-                pin: true,
-                scrub: 1,
+                });
+                cards?.forEach((card, i) => {
+                    tl.fromTo(
+                        card,
+                        { y: "100vh" },
+                        { y: 0, ease: "power1.out" },
+                        i * 0.6
+                    )
+                })
+
+
+                // Add pause at end before unpinning
+                tl.to({}, { duration: 0.5 });
             }
+            if (isMobile) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: testimonialRef.current,
+                        start: "top top",
+                        end: `+=${((cards?.length ?? 0) + 1) * 100}%`,
+                        pin: true,
+                        scrub: true,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    }
+                });
+                cards?.forEach((card, i) => {
+                    tl.fromTo(
+                        card,
+                        { y: "100vh" },
+                        { y: 0, ease: "power1.out" },
+                        i * 0.6
+                    )
+                })
+                tl.to({}, { duration: 0.5 });
+            }
+
+            // Animate each card sliding up from bottom
+
+
+
         });
 
 
 
-        // Animate each card sliding up from bottom
-        cards?.forEach((card, index) => {
-            tl.to(card, {
-                y: 0,
-                duration: 1,
-                ease: "power2.out"
-            }, index * 1);
-        });
 
-        // Add pause at end before unpinning
-        tl.to({}, { duration: 0.5 });
+
 
     }, { scope: testimonialRef });
     const handleCLick = (e: React.MouseEvent<HTMLVideoElement>) => {
         if (e.currentTarget.paused) {
             e.currentTarget.play()
-            
+
         } else {
             e.currentTarget.pause()
         }
     }
-    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement> ): void => {
+    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement>): void => {
         e.currentTarget.play()
-        
+
     }
     const handleMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
         e.currentTarget.pause()
@@ -88,10 +134,10 @@ const TesimonialSection = () => {
                             `}
                             style={{ zIndex: index }}
                         >
-                            <video onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseOut(e)} onClick={(e) => handleCLick(e)} src={card.src} loop muted playsInline className="w-full h-full object-cover"></video>
+                            <video onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseOut(e)} onClick={(e) => handleCLick(e)} src={card.src} loop muted playsInline className="w-full h-full object-cover"></video>
                             <div className='absolute  left-[2%] top-[88%] w-fit h-fit  inset-0 flex items-center justify-start gap-x-2'>
                                 <div>
-                                    <Image src={card.img} alt={card.name} height={40} width={40} className='object-cover h-14 w-14'/>
+                                    <Image src={card.img} alt={card.name} height={40} width={40} className='object-cover h-14 w-14' />
                                 </div>
                                 <p className='text-2xl font-antonio'>{card.name}</p>
                             </div>

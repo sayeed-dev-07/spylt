@@ -22,30 +22,44 @@ const VideoSection = () => {
             duration: 8,
             ease: 'none'
         })
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: 'top top',
-                end: '300%',
-                scrub: 0.5,
-                pin: true
-            },
 
-        })
         const mm = gsap.matchMedia()
         mm.add({
             isDesktop: "(min-width: 768px)",
             isMobile: "(max-width: 767px)"
         }, (context) => {
-            const { isDesktop } = context.conditions || {};
+            const { isDesktop, isMobile } = context.conditions || {};
             if (isDesktop) {
-
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: 'top top',
+                        end: '300%',
+                        scrub: 0.5,
+                        pin: true
+                    },
+                })
                 gsap.set(containerRef.current, {
                     clipPath: 'circle(7.5% at 50% 50%)'
                 })
                 tl.to(containerRef.current, {
                     clipPath: 'circle(100% at 50% 50%)'
                 })
+            }
+            if (isMobile) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: 'top top',
+                        end: '150%',
+                        scrub: 0.5,
+                        pin: true
+                    },
+                })
+                gsap.set(containerRef.current, {
+                    clipPath: "none"
+                })
+
             }
         });
 

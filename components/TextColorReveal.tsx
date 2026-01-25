@@ -46,7 +46,7 @@ const TextColorReveal = ({ text }: { text: string }) => {
 
     return (
         <p 
-            className=' w-full leading-22 md:leading-35' 
+            className=' w-full leading-14 sm:leading-15 md:leading-35' 
             ref={textContainer}
         >
             {text}
