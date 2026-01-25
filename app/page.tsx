@@ -3,6 +3,7 @@ import BenefitSection from "@/components/BenefitSection";
 import Details from "@/components/Details";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
+import TesimonialSection from "@/components/TesimonialSection";
 import TextSection from "@/components/TextSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -42,8 +43,11 @@ export default function Home() {
      </div>
      <Products/>
      <Details/>
-     <BenefitSection/>
-     <div className="h-dvh bg-black"></div>
+     <div>
+      <BenefitSection/>
+      <TesimonialSection/>
+     </div>
+     
     </div>
 
   );
