@@ -47,7 +47,7 @@ export default function Home() {
       <BenefitSection/>
       <TesimonialSection/>
      </div>
-     
+     <div className="min-h-screen"></div>
     </div>
 
   );
