@@ -1,3 +1,5 @@
+
+
 'use client'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -84,16 +86,10 @@ const TesimonialSection = () => {
 
         });
 
-
-
-
-
-
     }, { scope: testimonialRef });
     const handleCLick = (e: React.MouseEvent<HTMLVideoElement>) => {
-        if (e.currentTarget.paused) {
+        if (!e.currentTarget.paused) {
             e.currentTarget.play()
-
         } else {
             e.currentTarget.pause()
         }
@@ -125,21 +121,21 @@ const TesimonialSection = () => {
 
                             key={index}
                             className={`card 
-                                md:w-[240px] lg:w-[270px] w-[270px] xl:w-[310px] 
-                                flex-none rounded-2xl overflow-hidden border-8 border-black 
-                                /* YOUR ORIGINAL CSS POSITIONING */
-                                -mx-20 -mt-115 first:mt-0 md:mt-0 
-                                relative 
-                                ${card.rotation} ${card.translation}
-                            `}
+                                md:w-[240px] lg:w-[270px] w-[270px] xl:w-[310px] 
+                                flex-none rounded-2xl overflow-hidden border-8 border-black 
+                                /* YOUR ORIGINAL CSS POSITIONING */
+                                -mx-20 -mt-115 first:mt-0 md:mt-0 
+                                relative 
+                                ${card.rotation} ${card.translation}
+                            `}
                             style={{ zIndex: index }}
                         >
                             <video onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseOut(e)} onClick={(e) => handleCLick(e)} src={card.src} loop muted playsInline className="w-full h-full object-cover"></video>
-                            <div className='absolute  left-[2%] top-[88%] w-fit h-fit  inset-0 flex items-center justify-start gap-x-2'>
-                                <div>
-                                    <Image src={card.img} alt={card.name} height={40} width={40} className='object-cover h-14 w-14' />
+                            <div className='absolute  left-[2%] top-[88%] w-fit h-fit  inset-0 flex items-center justify-start gap-x-2'>
+                                <div className='absolute top-[88%] left-3 flex items-center gap-2 bg-white/20 backdrop-blur-lg p-1.5 rounded-full pr-14'>
+                                    <Image src={card.img} alt={card.name} height={40} width={40} className='rounded-full h-10 w-10 object-cover' />
+                                    <p className='text-xl font-antonio leading-none'>{card.name}</p>
                                 </div>
-                                <p className='text-2xl font-antonio'>{card.name}</p>
                             </div>
                         </div>
                     ))}
