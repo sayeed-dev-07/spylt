@@ -13,82 +13,26 @@ const VideoSection = () => {
     const sectionRef = useRef<HTMLDivElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const reviewWrapperRef = useRef<HTMLDivElement | null>(null);
-
-    useGSAP(() => {
-        const mm = gsap.matchMedia();
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: 'top top',
-                // Increased end to account for the extra 20vh height
-                end: '+=250%', 
-                scrub: 1,
-                pin: true,
-                invalidateOnRefresh: true,
-            }
-        });
-
-        mm.add({
-            isDesktop: "(min-width: 768px)",
-            isMobile: "(max-width: 767px)"
-        }, (context) => {
-            // @ts-ignore
-            const { isDesktop } = context.conditions;
-
-            if (isDesktop) {
-                gsap.set(sectionRef.current, { clipPath: 'circle(4% at 50% 50%)' });
-                tl.to(sectionRef.current, {
-                    clipPath: 'circle(100% at 50% 50%)',
-                    ease: 'none'
-                });
-            } else {
-                gsap.set(sectionRef.current, { clipPath: 'none' });
-            }
-
-            // SLIDE LOGIC:
-            // We animate 'y' instead of 'yPercent' for more precision with mixed vh units
-            tl.fromTo(reviewWrapperRef.current, 
-                { y: "100vh" }, // Start completely below the video
-                { y: "0vh", ease: 'none' } // Slide up until the top hits the top
-            );
-            
-            // Optional: If you want the review section to keep sliding 
-            // so the user sees the bottom 20vh while still pinned:
-            tl.to(reviewWrapperRef.current, {
-                y: "-20vh", // Pulls the bottom 20vh into view
-                ease: 'none'
-            });
-        });
-
-    }, { scope: containerRef });
+    const circleImg = useRef(null)
+    useGSAP(()=>{
+        gsap.to(circleImg.current,{
+            rotate:'+=360',
+            repeat:-1,
+            duration:6,
+            ease:'none'
+        })
+    })
 
     return (
-        <div ref={containerRef} className="relative w-full overflow-hidden">
-            {/* 1. Video Layer: Fixed at 100vh */}
-            <div
-                ref={sectionRef}
-                className='relative h-screen w-full overflow-hidden bg-black'
-            >
-                <div className='absolute inset-0 w-full h-full z-0'>
-                    <video autoPlay muted loop playsInline className='h-full w-full object-cover'>
-                        <source src="/videos/pin-video.mp4" type="video/mp4" />
-                    </video>
-                </div>
-
-                <div className='relative z-10 h-full w-full flex items-center justify-center'>
-                    <div className='p-8 md:p-12 bg-white/20 rounded-full backdrop-blur-md border border-white/30'>
-                        <Image alt='play' width={40} height={40} src={'/images/play.svg'} className="w-8 h-8 md:w-10 md:h-10" />
+        <div ref={containerRef} className='md:-translate-y-[25%] h-screen w-full relative'>
+            <video className='w-full h-full object-cover' src="/videos/pin-video.mp4" playsInline loop autoPlay muted ></video>
+            <div className='absolute w-full h-full inset-0 flex items-center justify-center'>
+                <div className='sm:w-[8vw] w-[12vw] h-[12vw] sm:h-[8vw]'>
+                    <div className='rounded-full backdrop-blur-2xl h-full w-full relative flex items-center justify-center'>
+                    <Image alt='play' src={'/images/play.svg'} width={120} height={120} className='object-cover w-[4vw] sm:w-[2.5vw]'/>
                     </div>
+                    <Image ref={circleImg} alt='circle' src={'/images/circle-text.svg'} width={120} height={120} className='object-cover w-[20vw] sm:w-[12vw] absolute inset-0 top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2'/>
                 </div>
-            </div>
-
-            {/* 2. Review Layer: Set to 120vh */}
-            <div 
-                ref={reviewWrapperRef}
-                className='absolute top-0 left-0 z-20 w-full min-h-[130vh]'
-            >
-                <ReviewSection />
             </div>
         </div>
     );
