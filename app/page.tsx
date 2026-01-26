@@ -1,7 +1,10 @@
 'use client'
 import BenefitSection from "@/components/BenefitSection";
+import BottomLayer from "@/components/BottomLayer";
 import Details from "@/components/Details";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Map from "@/components/Map";
 import Products from "@/components/Products";
 import TesimonialSection from "@/components/TesimonialSection";
 import TextSection from "@/components/TextSection";
@@ -15,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Home() {
   const containeRef = useRef<HTMLDivElement | null>(null)
   const heroRef = useRef<HTMLDivElement | null>(null)
-  const videoContainer = useRef<HTMLDivElement | null>(null)
+
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -27,9 +30,9 @@ export default function Home() {
       }
     })
     tl.to(heroRef.current, {
-      rotate: '14deg',
-      scale: 0.8,
-      y: 100,
+      rotate: '12deg',
+      scale: 0.92,
+      y: 400,
       ease: 'power1.inOut'
     })
   }, { scope: containeRef })
@@ -44,15 +47,13 @@ export default function Home() {
       </div>
       <Products />
       <Details />
-      <div ref={videoContainer}>
-        <div>
-          <BenefitSection />
-        </div>
-        <div>
-          <TesimonialSection />
-        </div>
+      <BenefitSection />
+      <TesimonialSection />
+      <div className="mt-[-140vh]">
+        <BottomLayer/>
       </div>
-      <div className="min-h-screen"></div>
+      <Map/>
+      <Footer/>
     </div>
 
   );

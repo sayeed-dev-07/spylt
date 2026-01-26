@@ -31,7 +31,7 @@ const TextAnimationChar = ({ text, style, delay=0 }: { text: string, style?: str
             },
             
             ease: 'power3.out',
-            stagger:0.02,
+            stagger:0.04,
             delay:delay,
             autoAlpha: 1,
             yPercent: 0,

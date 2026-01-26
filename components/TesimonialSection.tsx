@@ -31,7 +31,7 @@ const TesimonialSection = () => {
                     scrollTrigger: {
                         trigger: testimonialRef.current,
                         start: "top top",
-                        end: `+=${((cards?.length ?? 0) + 1) * 100}%`,
+                        end: `+=${((cards?.length ?? 0) - 3) * 100}%`,
                         pin: true,
                         scrub: 1,
                         anticipatePin: 1,
@@ -42,14 +42,14 @@ const TesimonialSection = () => {
                 cards?.forEach((card, i) => {
                     tl.from(
                         card,
-                        { yPercent: 150, ease: "power1.out" },
+                        { yPercent: 150, ease: "power1.in" },
                         i * 0.3
                     )
                 })
 
 
                 // Add pause at end before unpinning
-                tl.to({}, { duration: 0.4 });
+                // tl.to({}, { duration: 0.2 });
             }
             if (isMobile) {
                 const tl = gsap.timeline({
@@ -66,7 +66,7 @@ const TesimonialSection = () => {
                 cards?.forEach((card, i) => {
                     tl.from(
                         card,
-                        { yPercent: 150, ease: "power1.out" },
+                        { yPercent: 150, ease: "power1.in" },
                         i * 0.5
                     )
                 })
@@ -100,9 +100,9 @@ const TesimonialSection = () => {
 
             {/* Header Text Area */}
             <div className='relative pt-[10vh]'>
-                <TextMoveAnim text="what's" x={500} />
-                <TextMoveAnim black={false} text="everyone" x={400} />
-                <TextMoveAnim text="talking" x={-600} />
+                <TextMoveAnim text="what's" x={800} />
+                <TextMoveAnim black={false} text="everyone" x={500} />
+                <TextMoveAnim text="talking" x={-800} />
             </div>
 
             {/* Cards Container - Using your original bottom positioning */}

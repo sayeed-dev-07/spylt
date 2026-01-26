@@ -36,9 +36,10 @@ const VideoSection = () => {
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: 'top top',
-                        end: '300%',
+                        end: '360%',
                         scrub: 0.5,
-                        pin: true
+                        pin: true,
+                        
                     },
                 })
                 gsap.set(containerRef.current, {
@@ -68,7 +69,7 @@ const VideoSection = () => {
     })
 
     return (
-        <div ref={containerRef} className=' min-h-screen w-full relative'>
+        <div ref={containerRef} className='min-h-screen w-full relative'>
             <video className='w-full h-full object-cover' src="/videos/pin-video.mp4" playsInline loop autoPlay muted ></video>
             <div className='absolute w-full h-full inset-0 flex items-center justify-center'>
                 <div className='sm:w-[8vw] w-[12vw] h-[12vw] sm:h-[8vw]'>

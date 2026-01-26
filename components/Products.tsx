@@ -75,7 +75,7 @@ const Products = () => {
                                     <p className="text-milk">freaking</p>
                                 </div>
                             </div>
-                            <TextAnimationChar delay={0.7} text="delicious flavors" />
+                            <TextAnimationChar text="delicious flavors" />
                         </div>
                     </div>
 
