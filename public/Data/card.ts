@@ -4,7 +4,7 @@ export const cards = [
     rotation: "rotate-z-[-4deg]",
     name: "Madison",
     img: "/images/p1.png",
-    translation: "translate-y-[-5%]",
+    translation: "translate-y-[-2%]",
   },
   {
     src: "/videos/f2.mp4",
@@ -17,14 +17,14 @@ export const cards = [
     rotation: "rotate-z-[-4deg]",
     name: "Andrew",
     img: "/images/p3.png",
-    translation: "translate-y-[-5%]",
+    translation: "translate-y-[-1%]",
   },
   {
     src: "/videos/f4.mp4",
     rotation: "rotate-z-[4deg]",
     name: "Bryan",
     img: "/images/p4.png",
-    translation: "translate-y-[5%]",
+    translation: "translate-y-[2%]",
   },
   {
     src: "/videos/f5.mp4",
@@ -37,7 +37,7 @@ export const cards = [
     rotation: "rotate-z-[4deg]",
     name: "Devante",
     img: "/images/p6.png",
-    translation: "translate-y-[5%]",
+    translation: "translate-y-[2%]",
   },
   {
     src: "/videos/f7.mp4",

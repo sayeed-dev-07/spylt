@@ -15,39 +15,44 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Home() {
   const containeRef = useRef<HTMLDivElement | null>(null)
   const heroRef = useRef<HTMLDivElement | null>(null)
+  const videoContainer = useRef<HTMLDivElement | null>(null)
 
-  useGSAP(()=>{
+  useGSAP(() => {
     const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger:heroRef.current,
-        start:'1% top',
-        end:'bottom top',
-        scrub:true,
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: '1% top',
+        end: 'bottom top',
+        scrub: true,
       }
     })
-    tl.to(heroRef.current,{
-      rotate:'14deg',
-      scale:0.8,
-      y:100,
-      ease:'power1.inOut'
+    tl.to(heroRef.current, {
+      rotate: '14deg',
+      scale: 0.8,
+      y: 100,
+      ease: 'power1.inOut'
     })
-  },{scope:containeRef})
+  }, { scope: containeRef })
 
   return (
     <div ref={containeRef} className="overflow-hidden">
-     <div className="z-2 will-change-transform" ref={heroRef}>
-        <Hero/>
-     </div>
-     <div className="z-5 relative">
-      <TextSection/>
-     </div>
-     <Products/>
-     <Details/>
-     <div>
-      <BenefitSection/>
-      <TesimonialSection/>
-     </div>
-     <div className="min-h-screen"></div>
+      <div className="z-2 will-change-transform" ref={heroRef}>
+        <Hero />
+      </div>
+      <div className="z-5 relative">
+        <TextSection />
+      </div>
+      <Products />
+      <Details />
+      <div ref={videoContainer}>
+        <div>
+          <BenefitSection />
+        </div>
+        <div>
+          <TesimonialSection />
+        </div>
+      </div>
+      <div className="min-h-screen"></div>
     </div>
 
   );

@@ -54,7 +54,7 @@ const VideoSection = () => {
                         trigger: containerRef.current,
                         start: 'top top',
                         end: '150%',
-                        scrub: 0.5,
+                        scrub: true,
                         pin: true
                     },
                 })

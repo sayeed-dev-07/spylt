@@ -1,5 +1,3 @@
-
-
 'use client'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -10,9 +8,7 @@ import { cards } from '@/public/Data/card';
 import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger)
-ScrollTrigger.config({
-    ignoreMobileResize: true
-})
+
 
 const TesimonialSection = () => {
     const testimonialRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +18,6 @@ const TesimonialSection = () => {
         gsap.set(testimonialRef.current, { y: '-140vh' })
         const cards = testimonialRef.current?.querySelectorAll('.card')
         // Position all cards below the viewport initially
-        gsap.set('.card', { y: '100vh' });
         gsap.set(".card", { force3D: true })
         gsap.set(testimonialRef.current, { force3D: true })
         const mm = gsap.matchMedia()
@@ -45,17 +40,16 @@ const TesimonialSection = () => {
 
                 });
                 cards?.forEach((card, i) => {
-                    tl.fromTo(
+                    tl.from(
                         card,
-                        { y: "100vh" },
-                        { y: 0, ease: "power1.out" },
-                        i * 0.6
+                        { yPercent: 150, ease: "power1.out" },
+                        i * 0.3
                     )
                 })
 
 
                 // Add pause at end before unpinning
-                tl.to({}, { duration: 0.5 });
+                tl.to({}, { duration: 0.4 });
             }
             if (isMobile) {
                 const tl = gsap.timeline({
@@ -70,14 +64,12 @@ const TesimonialSection = () => {
                     }
                 });
                 cards?.forEach((card, i) => {
-                    tl.fromTo(
+                    tl.from(
                         card,
-                        { y: "100vh" },
-                        { y: 0, ease: "power1.out" },
-                        i * 0.6
+                        { yPercent: 150, ease: "power1.out" },
+                        i * 0.5
                     )
                 })
-                tl.to({}, { duration: 0.5 });
             }
 
             // Animate each card sliding up from bottom
@@ -104,7 +96,7 @@ const TesimonialSection = () => {
 
     return (
         /* Use h-screen to ensure the pinning doesn't create extra white space */
-        <div ref={testimonialRef} className='relative z-10 w-full bg-milk overflow-hidden h-screen'>
+        <div ref={testimonialRef} className=' z-10 w-full bg-milk overflow-hidden h-screen'>
 
             {/* Header Text Area */}
             <div className='relative pt-[10vh]'>
