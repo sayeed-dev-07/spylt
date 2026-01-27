@@ -49,7 +49,7 @@ const TesimonialSection = () => {
 
 
                 // Add pause at end before unpinning
-                // tl.to({}, { duration: 0.2 });
+                tl.to({}, { duration: 0.2 });
             }
             if (isMobile) {
                 const tl = gsap.timeline({
@@ -70,10 +70,11 @@ const TesimonialSection = () => {
                         i * 0.5
                     )
                 })
+                tl.to({}, { duration: 0.2 });
             }
 
             // Animate each card sliding up from bottom
-
+            
 
 
         });

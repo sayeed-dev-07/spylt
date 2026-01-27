@@ -77,3 +77,19 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+/* Standard selection */
+::selection {
+  background-color: #4a4a4a; /* The dark gray from your image */
+  color: #F5E6D3;            /* Your 'milk' color (adjust hex if needed) */
+}
+
+/* Firefox specific */
+::-moz-selection {
+  background-color: #4a4a4a;
+  color: #F5E6D3;
+}
+
+/* Clean up mobile tap behavior */
+html {
+  -webkit-tap-highlight-color: transparent;
+}

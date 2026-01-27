@@ -21,6 +21,10 @@ export default function Home() {
 
 
   useGSAP(() => {
+    gsap.set(heroRef.current, {
+            force3D: true,
+            willChange: 'transform'
+        });
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: heroRef.current,
@@ -32,14 +36,14 @@ export default function Home() {
     tl.to(heroRef.current, {
       rotate: '12deg',
       scale: 0.92,
-      y: 400,
-      ease: 'power1.inOut'
+      y: 350,
+      ease: 'power1.inOut',
     })
   }, { scope: containeRef })
 
   return (
     <div ref={containeRef} className="overflow-hidden">
-      <div className="z-2 will-change-transform" ref={heroRef}>
+      <div className="z-2" ref={heroRef}>
         <Hero />
       </div>
       <div className="z-5 relative">
