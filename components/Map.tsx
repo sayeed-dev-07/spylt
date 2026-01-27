@@ -5,31 +5,36 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import TextAnimation from './textReveal';
 import Button from './Button';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger)
 
 const bgImg = 'https://cdn.prod.website-files.com/669a8d6498ba88c08dfd2cd2/66a799f357e5045354c1d4e9_map.svg'
 
 const Map = () => {
+    
     const textCard = useRef<HTMLDivElement | null>(null)
+    const containerRef = useRef<HTMLDivElement | null>(null)
 
     useGSAP(()=>{
         gsap.fromTo(textCard.current,
             { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' },
             {
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                duration: 0.8,
-                ease: 'power2.out',
+                duration: 1,
+                ease: 'none',
                 scrollTrigger: {
                     trigger: textCard.current,
                     start: 'top 80%',
-                    end:'bottom 30%',
-                    scrub:0.5,
+                    
+                    anticipatePin: 1,
                 },
             }
         )
-    })
+    },{scope: containerRef})
 
     return (
-        <div className='min-h-[90vh] relative w-full '>
+        <div ref={containerRef} className='min-h-[90vh] relative w-full '>
             <div style={{ backgroundImage: `url(${bgImg})` }} className='h-full z-5 absolute inset-0 bg-center bg-cover'>
             </div>
             <div className='absolute z-25 w-full flex flex-col justify-center md:items-start items-center text-6xl inset-0 md:text-8xl  xl:text-[150px] px-2 py-[3%] sm:px-[5%]'>
